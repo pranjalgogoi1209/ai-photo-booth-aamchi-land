@@ -78,7 +78,7 @@ export default function Email({ setShowEmail, url }) {
     try {
       axios
         .post(
-          "https://techkilla.in/aiphotobooth/aiphotobooth_ifest/emailer/index.php",
+          "https://techkilla.in/aiphotobooth/aiphotobooth_aamchi_land/emailer/index.php",
           {
             url: url,
             email: userEmail,
