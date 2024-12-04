@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./cameraPage.module.css";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -17,19 +17,41 @@ export default function CameraPage({ setCapturedImg }) {
   const navigate = useNavigate();
   const [img, setImg] = useState();
   const [isCaptured, setIsCaptured] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+  const [isCounting, setIsCounting] = useState(false);
 
-  // handle-capture
-  const handleCapture = (e) => {
-    if (webRef.current.getScreenshot()) {
-      setIsCaptured(true);
-      setImg(webRef.current.getScreenshot());
+  useEffect(() => {
+    let countdownInterval;
+
+    if (isCounting && countdown > 0) {
+      countdownInterval = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+    } else if (isCounting && countdown === 0) {
+      // Capture the screenshot when countdown hits 0
+      if (webRef.current.getScreenshot()) {
+        setIsCaptured(true);
+        setImg(webRef.current.getScreenshot());
+      }
+      setIsCounting(false); // Stop counting
     }
+
+    return () => clearInterval(countdownInterval); // Cleanup interval on unmount or re-run
+  }, [isCounting, countdown]);
+
+  // console.log(countdown);
+
+  const handleCapture = (e) => {
+    // Reset countdown and start it
+    setCountdown(3);
+    setIsCounting(true);
   };
 
   // handle-retake
   const handleRetake = (e) => {
     setIsCaptured(false);
     img && setImg("");
+    setCountdown(3);
   };
 
   // toast options
@@ -68,7 +90,26 @@ export default function CameraPage({ setCapturedImg }) {
 
       <main className={`flex-row-center ${styles.main}`}>
         <div className={styles.webcamParent}>
-          {img ? (
+          {!img && (
+            <Webcam
+              ref={webRef}
+              id={styles.webcam}
+              forceScreenshotSourceSize={true}
+            />
+          )}
+
+          {!isCaptured && isCounting && (
+            <h1 className={styles.countdown}>{countdown}</h1>
+          )}
+
+          {img && (
+            <img
+              src={img}
+              alt="captured image"
+              className={styles.capturedImage}
+            />
+          )}
+          {/* {img ? (
             <img
               src={img}
               alt="captured image"
@@ -80,7 +121,7 @@ export default function CameraPage({ setCapturedImg }) {
               id={styles.webcam}
               forceScreenshotSourceSize={true}
             />
-          )}
+          )} */}
         </div>
       </main>
 

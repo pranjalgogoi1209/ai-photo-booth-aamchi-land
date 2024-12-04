@@ -25,6 +25,12 @@
     -webkit-mask-image: -webkit-radial-gradient(white, black);
     border-radius: 2vw;
     background-color: #3a0472;
+    position: relative;
+    .countdown {
+      position: absolute;
+      top: 40%;
+      font-size: 13vw;
+    }
     .webcamParent {
       position: relative;
       width: 60vw;
