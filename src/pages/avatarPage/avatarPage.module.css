@@ -72,3 +72,16 @@
     /* width: 60vw; */
   }
 }
+
+@media screen and (max-width: 480px) {
+  .main {
+    gap: 0.9dvh;
+
+    .horiImg {
+      width: 12.5dvh !important;
+    }
+    .vertImg {
+      width: 14.5dvh !important;
+    }
+  }
+}

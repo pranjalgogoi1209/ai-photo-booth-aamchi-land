@@ -95,6 +95,7 @@ export default function CameraPage({ setCapturedImg }) {
               ref={webRef}
               id={styles.webcam}
               forceScreenshotSourceSize={true}
+              mirrored={true}
             />
           )}
 
