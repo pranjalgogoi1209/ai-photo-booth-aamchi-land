@@ -64,7 +64,7 @@ export default function AvatarPage({
     } */
 
     const filteredActualImgArr = originalImagesArr.filter(
-      (actualImg, ActualIndex) => ActualIndex === idx
+      (actualImg, ActualIndex) => ActualIndex === idx,
     );
     return filteredActualImgArr[0];
   };
@@ -89,6 +89,8 @@ export default function AvatarPage({
     setUrl(outputUrl);
   };
 
+  const apiUrl = import.meta.env.VITE_FACE_SWAP_API;
+
   // submitting the selected image and post request to api
   const handleSubmit = () => {
     // console.log("submitting selected avatar");
@@ -101,10 +103,10 @@ export default function AvatarPage({
 
         try {
           axios
-            .post("https://52.56.108.15/trail_rec", {
+            .post(apiUrl, {
               image: capturedImg.split(",")[1],
               choice: base64Data.split(",")[1],
-              // status: "PREMIUM",
+              status: "PREMIUM",
             })
             .then(function (response) {
               // console.log(response);
@@ -124,7 +126,7 @@ export default function AvatarPage({
     } else {
       toast.error(
         "Please select an image or capture your photo again...",
-        toastOptions
+        toastOptions,
       );
     }
   };

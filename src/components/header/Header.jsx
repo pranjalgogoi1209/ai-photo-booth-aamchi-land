@@ -20,9 +20,9 @@ export default function Header() {
   return (
     showNavbar && (
       <div className={`flex-row-center ${styles.Header}`}>
-        <Link to={"/"} className={`imgContainer ${styles.imgContainer}`}>
+        {/* <Link to={"/"} className={`imgContainer ${styles.imgContainer}`}>
           <img src={logo} alt="logo" />
-        </Link>
+        </Link> */}
       </div>
     )
   );

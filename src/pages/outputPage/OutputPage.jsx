@@ -56,13 +56,13 @@ export default function OutputPage({ generatedImg, url, setUrl }) {
             </div>
 
             {/* email */}
-            <div
+            {/* <div
               onClick={() => setShowEmail(true)}
               className="flex-row-center btnImg"
             >
-              {/* <button className={`btn2`}>EMAIL</button> */}
+              <button className={`btn2`}>EMAIL</button>
               <img src={emailBtn} alt="email-btn" />
-            </div>
+            </div> */}
 
             {/* print */}
             {/* <div onClick={handlePrint} className={`imgContainer ${styles.btn}`}>
@@ -86,7 +86,7 @@ export default function OutputPage({ generatedImg, url, setUrl }) {
       {showQr && <Qr url={url} setShowQr={setShowQr} />}
 
       {/* email */}
-      {showEmail && <Email setShowEmail={setShowEmail} url={url} />}
+      {/* {showEmail && <Email setShowEmail={setShowEmail} url={url} />} */}
     </div>
   );
 }
